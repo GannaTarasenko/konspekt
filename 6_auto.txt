@@ -1,0 +1,68 @@
+1
+Створіть клас Animal. Також створіть екземпляр класу Animal (замість реалізації класу можете використовувати pass) і привласніть змінній animal.
+class Animal:
+    pass  # Порожній блок
+animal = Animal()
+2
+Створіть клас Animal. Також створіть екземпляр класу Animal та привласніть змінній animal. Для класу Animal у конструкторі створіть дві властивості: nickname - кличка тварини та weight - вага тварини. Реалізуйте також метод класу say. При реалізації методу можна використати оператор pass, поки що головне - це визначення, а не конкретна реалізація.
+class Animal:
+    def __init__(self, nickname, weight):
+        self.nickname = nickname
+        self.weight = weight
+
+    def say(self):
+        pass
+animal = Animal("Pepa", 113)
+3
+Для попереднього завдання реалізуйте в класі Animal метод change_weight, який має змінювати вагу тварини.
+
+Викличте функцію change_weight(12) для об'єкта animal та змініть значення початкової ваги з 10 на 12 одиниць.
+class Animal:
+    def __init__(self, nickname, weight):
+        self.nickname = nickname
+        self.weight = weight
+
+    def say(self):
+        pass
+
+    def change_weight(self, new_weight):
+        self.weight = new_weight
+        
+animal = Animal("Simon", 10)
+animal.change_weight(12)
+4
+Додамо в клас Animal змінну класу color, значення якої спочатку дорівнює 'white', і метод change_color, який повинен змінювати значення змінної класу color.
+
+Створіть екземпляри об'єкта: first_animal та second_animal
+
+Викличте функцію change_color("red") для будь-якого екземпляра об'єкту Animal та змініть значення змінної класу color на "red".
+class Animal:
+    color = "white"
+
+    def __init__(self, nickname, weight, color):
+        self.nickname = nickname
+        self.weight = weight
+        self.color = color
+
+    def say(self):
+        pass
+
+    def change_color(self, new_color):
+        self.color = new_color
+        
+    def change_weight(self, weight):
+        self.weight = weight
+        
+first_animal = Animal("Simon", 10, "white")
+second_animal = Animal("Pip", 7, "white")
+animal = Animal
+
+animal.change_color(animal, "red")
+5
+Створіть клас Cat, батьківським класом якого є клас Animal. У класі Cat виконайте перевизначення методу say, щоб він повертав рядок "Meow" для екземплярів класу Cat.
+
+Фактично ми виконуємо при цьому поліморфізм. Поліморфізм - це здатність програми вибирати різні реалізації при виклику операцій з однією і тією ж назвою. Тобто при виклику методу say в екземпляра класу Cat викликається нова реалізація, а не успадкована від класу Animal
+
+Створіть також змінну cat, яка буде екземпляром класу Cat. При створенні змінної cat ім'я кота має бути "Simon", а вага - 10 одиниць.
+
+
