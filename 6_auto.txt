@@ -64,5 +64,354 @@ animal.change_color(animal, "red")
 Фактично ми виконуємо при цьому поліморфізм. Поліморфізм - це здатність програми вибирати різні реалізації при виклику операцій з однією і тією ж назвою. Тобто при виклику методу say в екземпляра класу Cat викликається нова реалізація, а не успадкована від класу Animal
 
 Створіть також змінну cat, яка буде екземпляром класу Cat. При створенні змінної cat ім'я кота має бути "Simon", а вага - 10 одиниць.
+class Animal:
+    def __init__(self, nickname, weight):
+        self.nickname = nickname
+        self.weight = weight
+
+    def say(self):
+        pass
+
+    def change_weight(self, weight):
+        self.weight = weight
+
+class Cat(Animal):
+    def say(self):
+        return "Meow"
+
+# Creating an instance of the Cat class
+cat = Cat("Simon", 10)
+6
+Create a Dog class whose parent class is the Animal one. In the Dog class, override the say method so that it returns the string "Woof" for instances of the Dog class.
+
+In the constructor of the Dog class, enter a new breed property. All properties inherited from the Animal class should remain.
+
+Create the following instance of the Dog class in the code.
+
+dog = Dog("Barbos", 23, "labrador")
+class Animal:
+    def __init__(self, nickname, weight):
+        self.nickname = nickname
+        self.weight = weight
+
+    def say(self):
+        pass
+
+    def change_weight(self, weight):
+        self.weight = weight
+
+class Dog(Animal):
+    def __init__(self, nickname, weight, breed):
+        super().__init__(nickname, weight)
+        self.breed = breed
+
+    def say(self):
+        return "Woof"
+
+# Creating an instance of the Dog class
+dog = Dog("Barbos", 23, "labrador")
+7
+For the previous task, let's add the Owner class - the dog's owner. The class has three attributes: name, age, and address. You also need to implement the info method, which returns a dictionary with the keys 'name', 'age', and 'address', and whose values are equal to the corresponding properties of the class instance.
+
+You should implement the owner attribute for the Dog class, which will be an instance of the Owner class. Add to the Dog class the who_is_owner method, which returns the result of calling the info method of an instance of the Owner class. It will be a dictionary with the following keys: name, age, and address of the owner.
+class Animal:
+    def __init__(self, nickname, weight):
+        self.nickname = nickname
+        self.weight = weight
+
+    def say(self):
+        pass
+
+    def change_weight(self, weight):
+        self.weight = weight
+
+
+class Owner:
+    def __init__(self, name, age, address):
+        self.name = name
+        self.age = age
+        self.address = address
+        
+    def info(self):
+        return {'name': self.name, 'age': self.age, 'address': self.address}
+            
+class Dog(Animal):
+    def __init__(self, nickname, weight, breed, owner):
+        self.breed = breed
+        self.owner = owner
+        super().__init__(nickname, weight)
+        super().__init__(nickname, weight)
+
+    def say(self):
+        return "Woof"
+
+    def who_is_owner(self):
+        return self.owner.info()
+8
+Create two classes: CatDog and DogCat. These classes should be inherited from two classes at once: Cat and Dog. After inheriting from an instance of the CatDog class, the parent say method should return Meow, and the DogCat class should return "Woof". For both of these classes, implement the info method returning a string in the following format f"{self.nickname}-{self.weight}".
+class Animal:
+    def __init__(self, nickname, weight):
+        self.nickname = nickname
+        self.weight = weight
+
+    def say(self):
+        pass
+
+
+class Cat(Animal):
+    def __init__(self, nickname, weight):
+        self.nickname = nickname
+        self.weight = weight
+
+    def say(self):
+        return "Meow"
+
+    def info(self):
+        return f"{self.nickname}-{self.weight}"
+
+class Dog(Animal):
+    def __init__(self, nickname, weight):
+        self.nickname = nickname
+        self.weight = weight
+
+    def say(self):
+        return "Woof"
+
+    def info(self):
+        return f"{self.nickname}-{self.weight}"
+
+class CatDog(Cat, Dog):
+    pass
+
+class DogCat(Dog, Cat):
+    pass
+9
+In the fourth module, we implemented the lookup_key function to search for all keys by value in the dictionary. We passed the dictionary as the first parameter to the function, and the value we wanted to find as the second. We got a list of keys or an empty list if we didn't find anything.
+
+def lookup_key(data, value):
+    keys = []
+    for key in data:
+        if data[key] == value:
+            keys.append(key)
+    return keys
+Create a LookUpKeyDict class whose parent is the UserDict class. Set the lookup_key function to be a method of the LookUpKeyDict class.
+from collections import UserDict
+
+class LookUpKeyDict(UserDict):
+    def lookup_key(self, value):
+        keys = []
+        for key in self.data:
+            if self.data[key] == value:
+                keys.append(key)
+        return keys
+
+# Example usage:
+lookup_dict = LookUpKeyDict({'a': 1, 'b': 2, 'c': 1})
+keys = lookup_dict.lookup_key(1)
+print(keys)  # Output: ['a', 'c']
+10
+TASKS: USING THE USERLIST
+Let's rewrite the task of calculating utility debts using the UserList class.
+
+payment = [1, -3, 4]
+
+
+def amount_payment(payment):
+    sum = 0
+    for value in payment:
+        if value > 0:
+            sum = sum + value
+    return sum
+Let's recall the condition. We have a list of utility debt readings at the end of the month. It's a payment list. The debts can be negative if we have an overpayment, or positive if we need to pay the bills.
+
+Create the AmountPaymentList class, which inherits from the UserList class. Set the amount_payment function to be a method of the AmountPaymentList class.
+from collections import UserList
+
+class AmountPaymentList(UserList):
+    def amount_payment(self):
+        total = 0
+        for value in self.data:
+            if value > 0:
+                total += value
+        return total
+
+# Example usage:
+payment = AmountPaymentList([1, -3, 4])
+total_amount = payment.amount_payment()
+print(total_amount)  # Output: 5
+11
+Create the NumberString class, inherit it from the UserString class, and define the number_count(self) method for it. This method will count the number of digits in the string.
+from collections import UserString
+
+class NumberString(UserString):
+    def number_count(self):
+        count = 0
+        for char in self.data:
+            if char.isdigit():
+                count += 1
+        return count
+
+# Example usage:
+num_string = NumberString("abc123def456")
+count = num_string.number_count()
+12
+Create the IDException class that will inherit the Exception class.
+
+Also, implement the add_id(id_list, employee_id) function, which adds the user ID employee_id to the id_list and returns the specified updated id_list.
+
+The add_id function will call its own IDException if the employee_id does not start with 01, otherwise the employee_id will be added to the id_list.
+class IDException(Exception):
+    pass
+
+def add_id(id_list, employee_id):
+    if not employee_id.startswith("01"):
+        raise IDException("Employee ID must start with '01'")
+    id_list.append(employee_id)
+    return id_list
+
+# Example usage:
+id_list = ["0101", "0123"]
+try:
+    id_list = add_id(id_list, "1234")  # This will raise IDException
+except IDException as e:
+    print("Error:", e)
+
+id_list = add_id(id_list, "012345")  # This will add the employee ID
+print(id_list)
+print(count)  # Output: 6
+13
+As we have already mentioned, polymorphism is the ability of a program to choose different implementations when calling operations with the same name.
+
+However, polymorphism is also the ability of objects to pretend to be something else. In the example above, Chupakabra pretended to be a dog and a cat.
+
+You need to implement the CatDog class without using inheritance from the Animal class, but so that an instance of the CatDog class behaves the same way as an instance of the Cat class. This means that it must pretend to be a Cat class.
+class Animal:
+    def __init__(self, nickname, weight):
+        self.nickname = nickname
+        self.weight = weight
+
+    def say(self):
+        pass
+
+    def change_weight(self, weight):
+        self.weight = weight
+
+
+class Cat(Animal):
+    def say(self):
+        return "Meow"
+
+
+class CatDog:
+    def __init__(self, nickname, weight):
+        self.nickname = nickname
+        self.weight = weight
+        self.cat = Cat(nickname, weight)
+
+    def change_weight(self, weight):
+        self.weight = weight
+        
+    def say(self):
+        return self.cat.say()
+        
+chupakabra = CatDog("Bob", 3)
+print(chupakabra.say())  
+
+14
+Implement a Contacts class that will work with contacts. In the first stage, we will add two methods.
+
+A list_contacts returns a list of contacts - the variable contacts from the current class instance.
+An add_contacts adds a new contact to the list, which is a variable of the object - contacts.
+The Contacts class contains a current_id class variable. We will use it when adding a new contact as a unique contact identifier. When we add a new contact, we pass the following arguments to the add_contacts method: name, phone, email, and favorite. The method should create a dictionary with the specified keys and values of the function parameters. You also need to add a new ID key to the dictionary, the value of which is the value of the current_id class variable.
+
+An example of the obtained dictionary:
+
+    {
+    "id": 1,
+    "name": "Wylie Pope",
+    "phone": "(692) 802-2949",
+    "email": "est@utquamvel.net",
+    "favorite": True,
+}
+We add the specified dictionary to the contacts list. Don't forget to increment the current_id variable by one after each call to the add_contacts method to keep the ID key unique for the dictionary.
+
+NOTE: Do not create an instance of the class in the code to pass the test correctly.
+class Contacts:
+    current_id = 1
+    
+    def __init__(self):
+        self.contacts = []
+    
+    def list_contacts(self):
+        return self.contacts
+        
+    def add_contacts (self, name, phone, email, favorite):
+        self.contacts.append({"id": Contacts.current_id, "name": name, "phone": phone, "email": email, "favorite": favorite})
+        Contacts.current_id += 1
+15
+We continue to extend the functionality of the Contacts class. At this stage, we will add the get_contact_by_id method to the class. The method should search for a contact by a unique ID in the contacts list and return a dictionary from it with the specified ID key. If the dictionary with the specified ID is not found in the contacts list, the method returns None.
+
+NOTE: Do not create an instance of the class passing the test correctly.
+class Contacts:
+    current_id = 1
+
+    def __init__(self):
+        self.contacts = []
+
+    def list_contacts(self):
+        return self.contacts
+
+    def add_contacts(self, name, phone, email, favorite):
+        self.contacts.append(
+            {
+                "id": Contacts.current_id,
+                "name": name,
+                "phone": phone,
+                "email": email,
+                "favorite": favorite,
+            }
+        )
+        Contacts.current_id += 1
+
+    def get_contact_by_id(self, id):
+        for contact in self.contacts:
+            if contact["id"] == id:
+                return contact
+        return None
+16
+TASKS: CONTACT BOOK. COMPLETION
+Let's complete the functionality of the Contacts class. At this stage, we will add the remove_contacts method to the class. The method should delete a contact by a unique ID in the contacts list. If the dictionary with the specified ID is not found in the contacts list, the method does not perform any actions on the contacts list.
+
+NOTE: Do not create an instance of the class passing the test correctly.
+class Contacts:
+    current_id = 1
+
+    def __init__(self):
+        self.contacts = []
+
+    def list_contacts(self):
+        return self.contacts
+
+    def add_contacts(self, name, phone, email, favorite):
+        self.contacts.append(
+            {
+                "id": Contacts.current_id,
+                "name": name,
+                "phone": phone,
+                "email": email,
+                "favorite": favorite,
+            }
+        )
+        Contacts.current_id += 1
+
+    def get_contact_by_id(self, id):
+        result = list(filter(lambda contact: contact.get("id") == id, self.contacts))
+        return result[0] if len(result) > 0 else None
+
+    def remove_contacts(self, id):
+        for contact in self.contacts:
+            if contact["id"] == id:
+                self.contacts.remove(contact)
+                break
 
 
